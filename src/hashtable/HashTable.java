@@ -58,7 +58,19 @@ public class HashTable<E> implements Set<E> {
 	 */
 	@Override
 	public boolean add(E element) throws NullPointerException {
-		return false;
+		if (element == null){
+			throw new NullPointerException("Element cannot be null.");
+		}
+		int hash = Math.abs(element.hashCode())%table.length;
+		if(table[hash] == null){
+			table[hash] = new LinkedList<E>();
+		}
+		if (table[hash].contains(element)){
+			return false; //element already in HashTable
+		}
+		table[hash].add(element);
+		size++;
+		return true;
 	}
 
 	/**
