@@ -259,8 +259,13 @@ public class HashTable<E> implements Set<E> {
 	 * @return The number of empty buckets
 	 */
 	public int numberOfEmptyBuckets() {
-		// TODO
-		return 0;
+		int count = 0;
+		for (int i=0; i<table.length; i++){
+			if (table[i] == null){
+				count ++;
+			}
+		}
+		return count;
 	}
 
 	// METHODS BELOW THIS LINE ARE NOT REQUIRED IN ORDER TO COMPLETE THE
