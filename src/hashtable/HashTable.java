@@ -242,9 +242,9 @@ public class HashTable<E> implements Set<E> {
 	 */
 	public int numberOfCollisions() {
 		int collisions = 0;
-		for (int i=0; i<table.length; i++){
-			if (table[i] != null && table[i].size() > 1){
-				collisions += table[i].size();
+		for (LinkedList<E> b : table){
+			if (b != null && b.size() > 1){
+				collisions += b.size();
 			}
 		}
 		return collisions;
@@ -258,9 +258,9 @@ public class HashTable<E> implements Set<E> {
 	 */
 	public int biggestBucket() {
 		int max = 0;
-		for (int i=0; i<table.length; i++){
-			if (table[i] != null){
-				max = Math.max(max, table[i].size());
+		for (LinkedList<E> b : table){
+			if (b != null){
+				max = Math.max(max, b.size());
 			}
 		}
 		return max;
@@ -295,7 +295,7 @@ public class HashTable<E> implements Set<E> {
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		throw new UnsupportedOperationException("Implementation Not Found");
+		return this.iterator();
 	}
 
 	/**
@@ -319,7 +319,11 @@ public class HashTable<E> implements Set<E> {
 	 */
 	@Override
 	public boolean removeAll(Collection<?> collection) {
-		throw new UnsupportedOperationException("Implementation Not Found");
+		boolean changed = false;
+		for (Object o : collection){
+			changed = remove(o) || changed;
+		}
+		return changed;
 	}
 
 	/**
@@ -343,7 +347,15 @@ public class HashTable<E> implements Set<E> {
 	 */
 	@Override
 	public boolean retainAll(Collection<?> collection) {
-		throw new UnsupportedOperationException("Implementation Not Found");
+		Object[] objects = toArray();
+		boolean changed = false;
+		for (Object o : objects){
+			if (!collection.contains(o)){
+				remove(o);
+				changed = true;
+			}
+		}
+		return changed;
 	}
 
 	 /**
