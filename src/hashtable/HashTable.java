@@ -199,8 +199,7 @@ public class HashTable<E> implements Set<E> {
 	 */
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Math.max(size, Integer.MAX_VALUE);
 	}
 
 	/**
