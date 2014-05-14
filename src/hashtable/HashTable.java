@@ -90,8 +90,11 @@ public class HashTable<E> implements Set<E> {
 	 */
 	@Override
 	public boolean addAll(Collection<? extends E> collection) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean changed = false;
+		for (E e : collection){
+			changed = add(e) || changed;
+		}
+		return changed;
 	}
 
 	/**
@@ -119,8 +122,8 @@ public class HashTable<E> implements Set<E> {
 	   */
 	@Override
 	public boolean contains(Object target) {
-		// TODO Auto-generated method stub
-		return false;
+		int hash = Math.abs(target.hashCode())%table.length;
+		return table[hash] != null && table[hash].contains(target);
 	}
 
 	/**
@@ -142,8 +145,12 @@ public class HashTable<E> implements Set<E> {
 	 */
 	@Override
 	public boolean containsAll(Collection<?> collection) {
-		// TODO Auto-generated method stub
-		return false;
+		for (Object o : collection){
+			if (!contains(o)){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
