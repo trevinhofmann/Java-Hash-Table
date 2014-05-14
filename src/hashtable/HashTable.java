@@ -182,8 +182,12 @@ public class HashTable<E> implements Set<E> {
 	 */
 	@Override
 	public boolean remove(Object target) {
-		// TODO Auto-generated method stub
-		return false;
+		if (!contains(target)){
+			return false;
+		}
+		int hash = Math.abs(target.hashCode())%table.length;
+		table[hash].remove(target);
+		return true;
 	}
 
 	/**
