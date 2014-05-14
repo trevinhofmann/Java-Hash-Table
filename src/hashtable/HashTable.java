@@ -217,7 +217,11 @@ public class HashTable<E> implements Set<E> {
 	 * @param capacity desired number of buckets
 	 */
 	public void setCapacity(int capacity) {
-		// TODO
+		Object[] temp = toArray();
+		table = (LinkedList<E>[]) new Object[capacity];
+		for (Object o : temp){
+			add((E) o);
+		}
 	}
 
 	/**
