@@ -89,7 +89,10 @@ public class HashTable<E> implements Set<E> {
 	 * @see #add(Object)
 	 */
 	@Override
-	public boolean addAll(Collection<? extends E> collection) {
+	public boolean addAll(Collection<? extends E> collection) throws NullPointerException {
+		if (collection == null || collection.contains(null)){
+			throw new NullPointerException("Collection cannot be null or contain null elements.");
+		}
 		boolean changed = false;
 		for (E e : collection){
 			changed = add(e) || changed;
@@ -121,7 +124,10 @@ public class HashTable<E> implements Set<E> {
 	   * (<a href="Collection.html#optional-restrictions">optional</a>)
 	   */
 	@Override
-	public boolean contains(Object target) {
+	public boolean contains(Object target) throws NullPointerException, ClassCastException {
+		if (target == null){
+			throw new NullPointerException("Target cannot be null.");
+		}
 		int hash = Math.abs(target.hashCode())%table.length;
 		return table[hash] != null && table[hash].contains(target);
 	}
@@ -144,7 +150,10 @@ public class HashTable<E> implements Set<E> {
 	 * @see    #contains(Object)
 	 */
 	@Override
-	public boolean containsAll(Collection<?> collection) {
+	public boolean containsAll(Collection<?> collection) throws NullPointerException, ClassCastException {
+		if (collection == null || collection.contains(null)){
+			throw new NullPointerException("Collection cannot be null or contain null elements.");
+		}
 		for (Object o : collection){
 			if (!contains(o)){
 				return false;
@@ -181,7 +190,10 @@ public class HashTable<E> implements Set<E> {
 	 * (<a href="Collection.html#optional-restrictions">optional</a>)
 	 */
 	@Override
-	public boolean remove(Object target) {
+	public boolean remove(Object target) throws NullPointerException, ClassCastException {
+		if (target == null){
+			throw new NullPointerException("Target cannot be null.");
+		}
 		if (!contains(target)){
 			return false;
 		}
@@ -307,8 +319,6 @@ public class HashTable<E> implements Set<E> {
 	 *
 	 * @param  collection collection containing elements to be removed from this set
 	 * @return <tt>true</tt> if this set changed as a result of the call
-	 * @throws UnsupportedOperationException if the <tt>removeAll</tt> operation
-	 *         is not supported by this set
 	 * @throws ClassCastException if the class of an element of this set
 	 *         is incompatible with the specified collection
 	 * (<a href="Collection.html#optional-restrictions">optional</a>)
@@ -318,7 +328,10 @@ public class HashTable<E> implements Set<E> {
 	 * @see #contains(Object)
 	 */
 	@Override
-	public boolean removeAll(Collection<?> collection) {
+	public boolean removeAll(Collection<?> collection) throws NullPointerException, ClassCastException {
+		if (collection == null || collection.contains(null)){
+			throw new NullPointerException("Collection cannot be null or contain null elements.");
+		}
 		boolean changed = false;
 		for (Object o : collection){
 			changed = remove(o) || changed;
@@ -336,8 +349,6 @@ public class HashTable<E> implements Set<E> {
 	 *
 	 * @param  collection collection containing elements to be retained in this set
 	 * @return <tt>true</tt> if this set changed as a result of the call
-	 * @throws UnsupportedOperationException if the <tt>retainAll</tt> operation
-	 *         is not supported by this set
 	 * @throws ClassCastException if the class of an element of this set
 	 *         is incompatible with the specified collection
 	 * (<a href="Collection.html#optional-restrictions">optional</a>)
@@ -346,7 +357,10 @@ public class HashTable<E> implements Set<E> {
 	 * @see #remove(Object)
 	 */
 	@Override
-	public boolean retainAll(Collection<?> collection) {
+	public boolean retainAll(Collection<?> collection) throws NullPointerException, ClassCastException{
+		if (collection == null || collection.contains(null)){
+			throw new NullPointerException("Collection cannot be null or contain null elements.");
+		}
 		Object[] objects = toArray();
 		boolean changed = false;
 		for (Object o : objects){
@@ -430,8 +444,13 @@ public class HashTable<E> implements Set<E> {
 	  * @throws NullPointerException if the specified array is null
 	  */
 	@Override
-	public <T> T[] toArray(T[] array) {
-		array = (T[]) new Object[size];
+	public <T> T[] toArray(T[] array) throws NullPointerException, ArrayStoreException{
+		if (array == null){
+			throw new NullPointerException("Array cannot be null.");
+		}
+		if (array.length < size){
+			array = (T[]) new Object[size];
+		}
 		int i = 0;
 		for (LinkedList<E> b : table){
 			for (E e : b){
