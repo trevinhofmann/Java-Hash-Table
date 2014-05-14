@@ -241,8 +241,13 @@ public class HashTable<E> implements Set<E> {
 	 * @return The number of collisions
 	 */
 	public int numberOfCollisions() {
-		// TODO
-		return 0;
+		int collisions = 0;
+		for (int i=0; i<table.length; i++){
+			if (table[i] != null && table[i].size() > 1){
+				collisions += table[i].size();
+			}
+		}
+		return collisions;
 	}
 
 	/**
@@ -254,7 +259,9 @@ public class HashTable<E> implements Set<E> {
 	public int biggestBucket() {
 		int max = 0;
 		for (int i=0; i<table.length; i++){
-			max = Math.max(max, table[i].size());
+			if (table[i] != null){
+				max = Math.max(max, table[i].size());
+			}
 		}
 		return max;
 	}
