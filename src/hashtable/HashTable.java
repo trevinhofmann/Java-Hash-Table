@@ -431,7 +431,15 @@ public class HashTable<E> implements Set<E> {
 	  */
 	@Override
 	public <T> T[] toArray(T[] array) {
-		throw new UnsupportedOperationException("Implementation Not Found");
+		array = (T[]) new Object[size];
+		int i = 0;
+		for (LinkedList<E> b : table){
+			for (E e : b){
+				array[i] = (T) e;
+				i++;
+			}
+		}
+		return array;
 	}
 
 }
