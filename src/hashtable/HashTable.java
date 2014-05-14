@@ -228,8 +228,7 @@ public class HashTable<E> implements Set<E> {
 	 * @return The load factor
 	 */
 	public double loadFactor() {
-		// TODO
-		return 0.0;
+		return (double) size / table.length;
 	}
 
 	/**
