@@ -208,8 +208,7 @@ public class HashTable<E> implements Set<E> {
 	 * @return The number of buckets
 	 */
 	public int getCapacity() {
-		// TODO
-		return 0;
+		return table.length;
 	}
 
 	/**
