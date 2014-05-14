@@ -249,8 +249,11 @@ public class HashTable<E> implements Set<E> {
 	 * @return The maximum number of elements in a bucket
 	 */
 	public int biggestBucket() {
-		// TODO
-		return 0;
+		int max = 0;
+		for (int i=0; i<table.length; i++){
+			max = Math.max(max, table[i].size());
+		}
+		return max;
 	}
 
 	/**
