@@ -37,7 +37,8 @@ public class HashTable<E> implements Set<E> {
 	 * @param capacity The desired number of buckets
 	 */
 	public HashTable(int capacity) {
-		table = (LinkedList<E>[]) new Object[capacity];
+		//table = (LinkedList<E>[]) new Object[capacity];
+		table = new LinkedList[capacity];
 		size = 0;
 	}
 
@@ -211,7 +212,7 @@ public class HashTable<E> implements Set<E> {
 	 */
 	@Override
 	public int size() {
-		return Math.max(size, Integer.MAX_VALUE);
+		return Math.min(size, Integer.MAX_VALUE);
 	}
 
 	/**

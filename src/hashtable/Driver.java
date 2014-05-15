@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Driver {
 
 	public static void main(String[] args){
-
+		test("story.txt", 1000);
 	}
 
 	private static void test(String filename, int capacity){
