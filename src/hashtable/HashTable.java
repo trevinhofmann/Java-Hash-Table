@@ -257,7 +257,7 @@ public class HashTable<E> implements Set<E> {
 		int collisions = 0;
 		for (LinkedList<E> b : table){
 			if (b != null && b.size() > 1){
-				collisions += b.size();
+				collisions += b.size()-1;
 			}
 		}
 		return collisions;
